@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Test = ()=>  {
+const Test = () => {
   // const [name, setName] = useState("");
   // const [pass, setPass] = useState("");
   // const [role, setRole] = useState("user");
@@ -22,10 +22,9 @@ const Test = ()=>  {
       setForm((form) => ({ ...form, [name]: event.target.value }));
     }
   };
-  
 
-  const loginHandler = () => {
-    console.log({ form });
+  const submitHandler = (event) => {
+    event.preventDefault();
   };
 
   // const nameHandler = (event) => {
@@ -46,63 +45,66 @@ const Test = ()=>  {
 
   return (
     <>
-      <input
-        type="text"
-        placeholder="Email"
-        name="email"
-        value={form.email}
-        onChange={changeHandler}
-      />
-      <input
-        type="password"
-        placeholder="password"
-        name="password"
-        value={form.password}
-        onChange={changeHandler}
-      />
-      <select value={form.role} name="role" onChange={changeHandler}>
-        <option value="ad">Admin</option>
-        <option value="us">User</option>
-        <option value="wrt">Writer</option>
-      </select>
-      <div>
-        <label htmlFor="male">male</label>
+      <form onSubmit={submitHandler}>
         <input
-          type="radio"
-          name="gender"
-          id="male"
-          
-          value="male"
+          type="text"
+          placeholder="Email"
+          name="email"
+          value={form.email}
           onChange={changeHandler}
-          checked={form.gender === "male"}
         />
-        <label htmlFor="female">female</label>
         <input
-          type="radio"
-          name="gender"
-          id="female"
-          
-          value="female"
+          type="password"
+          placeholder="password"
+          name="password"
+          value={form.password}
           onChange={changeHandler}
-          checked={form.gender === "female"}
         />
-        <label htmlFor="other">other</label>
+        <select value={form.role} name="role" onChange={changeHandler}>
+          <option value="ad">Admin</option>
+          <option value="us">User</option>
+          <option value="wrt">Writer</option>
+        </select>
+        <div>
+          <label htmlFor="male">male</label>
+          <input
+            type="radio"
+            name="gender"
+            id="male"
+            value="male"
+            onChange={changeHandler}
+            checked={form.gender === "male"}
+          />
+          <label htmlFor="female">female</label>
+          <input
+            type="radio"
+            name="gender"
+            id="female"
+            value="female"
+            onChange={changeHandler}
+            checked={form.gender === "female"}
+          />
+          <label htmlFor="other">other</label>
+          <input
+            type="radio"
+            name="gender"
+            id="other"
+            value="other"
+            onChange={changeHandler}
+            checked={form.gender === "other"}
+          />
+        </div>
         <input
-          type="radio"
-          name="gender"
-          id="other"
-          
-          value="other"
+          type="checkbox"
+          name="rules"
+          checked={form.rules}
           onChange={changeHandler}
-          checked={form.gender === "other"}
         />
-      </div>
-      <input type="checkbox" name="rules" checked={form.rules} onChange={changeHandler} />
 
-      <button onClick={loginHandler}>login</button>
+        <button type="submit">login</button>
 
-      <p>result: {JSON.stringify(form)}</p>
-
+        <p>result: {JSON.stringify(form)}</p>
+      </form>
     </>
   );
 };
